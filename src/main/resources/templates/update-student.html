@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
-    <title>학생명단 v1 | Add</title>
+    <title>학생명단 v1 | Update</title>
 </head>
 <body>
 <div class="container">
-    <h3>학생 명부 추가</h3>
-    <form action="#" th:action="@{/add}" th:object="${student}" method="post">
+    <h3>Update Student</h3>
+    <form action="#" th:action="@{/update/{id}(id=${student.id})}" th:object="${student}" method="post">
         <div class="form-group col-md-8">
             <label for="name" class="col-form-label">Name</label>
             <input type="text" th:field="*{name}" class="form-control" id="name" placeholder="Name">
@@ -25,9 +25,10 @@
             <input type="text" th:field="*{phoneNo}" class="form-control" id="phoneNo" placeholder="PhoneNo">
         </div>
         <div class="col-md-6">
-            <input type="submit" class="btn btn-primary" value="추가">
+            <input type="submit" class="btn btn-primary" value="수정">
         </div>
     </form>
+</div>
 </div>
 </body>
 </html>
