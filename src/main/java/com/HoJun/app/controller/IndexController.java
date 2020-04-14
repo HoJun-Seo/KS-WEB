@@ -20,7 +20,7 @@ public class IndexController {
     @GetMapping("/")
     public String index(Model model){
         Iterable<Student> students = studentRepository.findAll();
-        model.addAttribute("Students", students);
+        model.addAttribute("students", students);
         return "index";
     }
     @GetMapping("/add")
