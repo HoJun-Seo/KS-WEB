@@ -11,7 +11,7 @@
 <body>
 <div class="container">
     <h3>Add Student</h3>
-    <form action="#" th:action="@{/add}" th:object="${student}" method="post">
+    <form action="#" th:action="@{/add}" th:object="${student}" method="post">>
         <div class="form-group col-md-8">
             <label for="name" class="col-form-label">Name</label>
             <input type="text" th:field="*{name}" class="form-control" id="name" placeholder="Name">
