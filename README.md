@@ -1,4 +1,5 @@
 # ks-web
+
 ## 과제 2
 MVC pattern 에서 View 와 model의 연결
 
@@ -11,4 +12,4 @@ MVC pattern 에서 View 와 model의 연결
 
 ## 출력 결과
 
-<img src="img/view-and-model connection.png">
+<img src="img/view-and-model connection.">
