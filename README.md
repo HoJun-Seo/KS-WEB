@@ -1,5 +1,4 @@
 # ks-web
-
 ## 과제 2
 MVC pattern 에서 View 와 model의 연결
 
