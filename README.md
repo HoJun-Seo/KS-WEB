@@ -11,5 +11,4 @@ MVC pattern 에서 View 와 model의 연결
 - 웹 페이지에 이력서 내용을 출력한다.
 
 ## 출력 결과
-
-<img src="img/view-and-model connection.">
+<img src="img/view-and-model connection.PNG">
