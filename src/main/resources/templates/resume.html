@@ -25,7 +25,7 @@
             <div class="media flex-column flex-md-row">
                 <img class="mr-3 img-fluid picture mx-auto" src="/images/profile.jpg" alt="">
                 <div class="media-body p-4 d-flex flex-column flex-md-row mx-auto mx-lg-0">
-					<!-- Person 객체 -->
+                    <!-- Person 객체 -->
                     <div class="primary-info">
                         <h1 class="name mt-0 mb-1 text-white text-uppercase text-uppercase" th:text="${person?.name}">홍길동</h1>
                         <div class="title mb-3" th:text="${person?.job}">OOO 개발자</div>
@@ -34,24 +34,39 @@
                                 <i class="far fa-envelope fa-fw mr-2" data-fa-transform="grow-3"></i><span th:text="${person?.email}">hgd@gd.com</span></a>
                             </li>
                             <li>
-								<a href="#">
-									<i class="fas fa-mobile-alt fa-fw mr-2" data-fa-transform="grow-6"></i><span th:text="${person?.phoneNo}">010-0000-0000</span>
-								</a>
-							</li>
+                                <a href="#">
+                                    <i class="fas fa-mobile-alt fa-fw mr-2" data-fa-transform="grow-6"></i><span th:text="${person?.phoneNo}">010-0000-0000</span>
+                                </a>
+                            </li>
                         </ul>
                     </div><!--// Person 객체 종료-->
-					<!-- SNS 객체 -->
+                    <!-- SNS 객체 -->
                     <div class="secondary-info ml-md-auto mt-2">
                         <ul class="resume-social list-unstyled">
-                            <li class="mb-3">
+                            <!-- 만약(if), github이 null이면 출력하지 마! -->
+                            <!-- 만약, github이 null이 아니라면 출력! -->
+                            <li th:if="${!#strings.isEmpty(socialMedia.github)}" class="mb-3">
                                 <a href="#">
                                     <span class="fa-container text-center mr-2"><i class="fab fa-github-alt fa-fw"></i></span>
                                     <span th:text="|github.com/${socialMedia?.github}|">github.com/username</span>
                                 </a>
                             </li>
+                            <li th:if="${!#strings.isEmpty(socialMedia.twitter)}" class="mb-3">
+                                <a href="#">
+                                    <span class="fa-container text-center mr-2"><i class="fab fa-twitter fa-fw"></i></span>
+                                    <span th:text="|twitter.com/${socialMedia?.twitter}|">twitter.com/stevedoe</span>
+                                </a>
+                            </li>
+                            <li th:if="${!#strings.isEmpty(socialMedia.instagram)}" class="mb-3">
+                                <a href="#">
+                                    <span class="fa-container text-center mr-2"><i class="fab fa-instagram fa-fw"></i></span>
+                                    <span th:text="|instagram.com/${socialMedia?.instagram}|">instagram.com/username/</span>
+                                </a>
+                            </li>
+                            <li th:if="${!#strings.isEmpty(socialMedia.facebook)}">
                                 <a href="#">
                                     <span class="fa-container text-center mr-2"><i class="fab fa-facebook-f"></i></span>
-                                    <span th:text="|facebook.com/${socialMedia?.facebook}|">facebook.com/username</span>
+                                    <span th:text="|facebook.com/${socialMedia?.facebook}|">facebook.com</span>
                                 </a>
                             </li>
                         </ul>
@@ -127,14 +142,14 @@
                                     <span class="resume-lang-name font-weight-bold" th:text="${language.name}">English</span>
                                     <small class="text-muted font-weight-normal" th:text="${language.grade}">(Native)</small>
                                 </li>
-<!--                                <li class="mb-2 align-middle">-->
-<!--                                    <span class="resume-lang-name font-weight-bold">French</span> -->
-<!--                                    <small class="text-muted font-weight-normal">(Professional)</small>-->
-<!--                                </li>-->
-<!--                                <li>-->
-<!--                                    <span class="resume-lang-name font-weight-bold">Spanish</span> -->
-<!--                                    <small class="text-muted font-weight-normal">(Professional)</small>-->
-<!--                                </li>-->
+                                <!--                                <li class="mb-2 align-middle">-->
+                                <!--                                    <span class="resume-lang-name font-weight-bold">French</span> -->
+                                <!--                                    <small class="text-muted font-weight-normal">(Professional)</small>-->
+                                <!--                                </li>-->
+                                <!--                                <li>-->
+                                <!--                                    <span class="resume-lang-name font-weight-bold">Spanish</span> -->
+                                <!--                                    <small class="text-muted font-weight-normal">(Professional)</small>-->
+                                <!--                                </li>-->
                             </ul>
                         </div>
                     </section><!--//language-section-->
@@ -158,5 +173,4 @@
 </footer>
 
 </body>
-</html> 
-
+</html>
