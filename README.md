@@ -1,20 +1,13 @@
-# ks-web
+# 과제 #3
+-----
 
-## 과제 2
-MVC pattern 에서 View 와 model의 연결
+## `과제 #3`은 다음 두 가지 중 하나를 만드시면 됩니다.
 
-## 준비물
-- JDK 8 이상
-- gradle or IntelliJ
+* 1번 과제) "학생(Student) / 과목(Lesson) / 수강(Course)"의 '수정' 과 '삭제' 기능 추가
 
-## 기능 요구사항
-- 웹 페이지에 이력서 내용을 출력한다.
+* 2번 과제) 수강과목(courseList.html)의 '인원'을 계산해서 화면에 출력하는 기능 추가
+  * 에를 들어, 10명이 참석 가능한 과목이 1명이 수강하면 인원에 '9'가 출력되어야 함
 
-## 업데이트
-- socialMedia 객체 관련 사항 수정(2020/05/14)
-  - SocialMedia.java 파일 및 AppAplication.java 파일에 instagram, twitter 필드 다시 추가
-  - html 파일 instagram, twitter 필드에 대한 출력문 다시 추가
-  - html 파일 socialMedia 객체에 대한 thymeleaf 출력 조건문 부여
-
-## 출력 결과
-<img src="img/view-and-model connection.PNG">
+## 제출
+* 2020년 6월 21일까지 메일로 제출
+* 메일 본문에 1) github 주소, 2) 과제번호, 3) 분반, 학번, 이름을 `반드시` 표기할 것
