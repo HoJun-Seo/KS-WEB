@@ -1,9 +1,12 @@
 package kr.ac.ks.app.domain;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -16,11 +19,15 @@ public class Lesson {
     private String name;
     private int quota;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Course course;
+    @OneToMany
+    private List<Course> courses = new ArrayList<>();
 
-    public void setCourse(Course course) {
-        this.course = course;
-        this.course.getLessons().add(this);
+    public Lesson() {
+    }
+
+    @Builder
+    public Lesson(String name, int quota) {
+        this.name = name;
+        this.quota = quota;
     }
 }

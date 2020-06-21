@@ -8,14 +8,13 @@ import kr.ac.ks.app.repository.LessonRepository;
 import kr.ac.ks.app.repository.StudentRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+
 
 import java.util.List;
 
 @Controller
-public class CourseController {
+public class CourseController{
     private final StudentRepository studentRepository;
     private final CourseRepository courseRepository;
     private final LessonRepository lessonRepository;
@@ -41,8 +40,52 @@ public class CourseController {
                                ) {
         Student student = studentRepository.findById(studentId).get();
         Lesson lesson = lessonRepository.findById(lessonId).get();
-        Course course = Course.createCourse(student,lesson);
-        Course savedCourse = courseRepository.save(course);
+        if(lesson.getQuota() > 0) {
+            lesson.setQuota(lesson.getQuota() - 1);
+            Course course = Course.createCourse(student,lesson);
+            courseRepository.save(course);
+            return "redirect:/courses";
+        }
+        else return "redirect:/courses";
+    }
+
+    // 수강 신청 내역 수정(신청 내역 id값 기준)
+    @GetMapping("/course/update/{id}")
+    public String showCoruseUpdateForm(@PathVariable("id") Long courseId, Model model){
+        Course course = courseRepository.findById(courseId).orElseThrow(()->new IllegalArgumentException("Invalid id:" + courseId));
+        List<Student> students = studentRepository.findAll();
+        List<Lesson> lessons = lessonRepository.findAll();
+        model.addAttribute("courseUpdateForm", course);
+        model.addAttribute("students", students);
+        model.addAttribute("lessons", lessons);
+        return "courses/courseUpdateForm";
+    }
+
+    @PostMapping("/course/update/{id}")
+    public String courseUpdate(@PathVariable("id") Long courseId,
+                               @RequestParam("studentId") Long studentId,
+                               @RequestParam("lessonId") Long lessonId){
+        Course course = courseRepository.findById(courseId).orElseThrow(()->new IllegalArgumentException("Invalid id:" + courseId));
+        Student student = studentRepository.findById(studentId).get();
+        Lesson lesson = lessonRepository.findById(lessonId).get();
+        lesson.setQuota(lesson.getQuota());
+        course.updateCourse(student.getName(), lesson.getName(), course);
+        courseRepository.save(course);
+        return "redirect:/courses";
+    }
+
+    //수강 신청 내역 제거(신청 내역 id 값 기준)
+    @GetMapping("/course/delete/{id}")
+    public String deleteCourse(@PathVariable("id") Long id, Model model){
+        Course course = courseRepository.findById(id).orElseThrow(()->new IllegalArgumentException("Invalid id:" + id));
+        Student student = studentRepository.findByName(course.getStudent().getName());
+        Lesson lesson = lessonRepository.findByName(course.getLesson().getName());
+        student.getCourses().clear();
+        lesson.getCourses().clear();
+        courseRepository.delete(course);
+        lesson.setQuota(lesson.getQuota() + 1);
+        lessonRepository.save(lesson);
+        model.addAttribute("courses", courseRepository.findAll());
         return "redirect:/courses";
     }
 
@@ -52,5 +95,8 @@ public class CourseController {
         model.addAttribute("courses", courses);
         return "courses/courseList";
     }
-
 }
+
+
+
+

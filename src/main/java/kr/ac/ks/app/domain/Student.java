@@ -20,14 +20,15 @@ public class Student {
     private String name;
     private String email;
 
+    @OneToMany
+    private List<Course> courses = new ArrayList<>();
+
     public Student() {
     }
 
+    @Builder
     public Student(String name, String email) {
         this.name = name;
         this.email = email;
     }
-
-    @OneToMany(mappedBy = "student")
-    private List<Course> courses = new ArrayList<>();
 }

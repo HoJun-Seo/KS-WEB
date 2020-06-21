@@ -5,4 +5,5 @@ import kr.ac.ks.app.domain.Lesson;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface LessonRepository extends JpaRepository<Lesson, Long> {
+    Lesson findByName(final String name);
 }
